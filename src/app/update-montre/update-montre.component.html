@@ -1,0 +1,48 @@
+<div class="container"> 
+    <div> 
+      <h2>Modifier une Montre :</h2>              
+    </div> 
+         <form >          
+             <div  class="col-sm-2 col-md-2 col-lg-2"> 
+               <label >ID  Montre</label> 
+               <input  readonly type="text"  [(ngModel)]="currentMontre.idMontre" 
+ 
+                   name="idMontre" class="form-control"> 
+              </div> 
+          
+             <div class="col-sm-4 col-md-4 col-lg-4" > 
+               <label >Nom Montre</label> 
+               <input  type="text"[(ngModel)]= "currentMontre.nomMontre"   
+                   name="nomMontre" class="form-control"> 
+             </div> 
+
+             <div class="col-sm-2 col-md-2 col-lg-2"> 
+               <label >Prix Montre</label> 
+           <input type="number"   [(ngModel)]= "currentMontre.prixMontre" 
+ 
+                   name="prixMontre" class="form-control"> 
+             </div> 
+
+             <div class="col-sm-4 col-md-4 col-lg-4"> 
+                <label >Date création</label> 
+                <input  type="date"  [ngModel]="currentMontre.dateCreation | date: 'yyyy-MM-dd'"  (ngModelChange)=" currentMontre.dateCreation= $event"   name="dateCreation"  
+                class="form-control"> 
+                         </div> 
+
+
+
+              <div class="col-sm-4 col-md-4 col-lg-4"> 
+                <label >Genre</label> 
+
+                          <select class="form-control form-control-lg" id="idGen" name="idGen" [(ngModel)]="updateGenId">         
+                          <option *ngFor="let gen of genres" [value]="gen.idGen" >    
+                          {{gen.nomGen}} 
+                          </option> 
+                          </select>                      
+                          </div>  
+                          
+                          <div class="mt-2"> 
+           <button type="submit"  (click)="updateMontre()" class="btn btn-success">Modifer</button> 
+                          </div>   
+                     </form> 
+           </div>   

@@ -1,0 +1,52 @@
+<div class="container">
+
+
+    <form class="form-inline">      
+        <div class="form-group mx-sm-3 mb-2 mt-2 "> 
+        <label>Nom Montre en tapant</label> 
+        <input #nom [(ngModel)]="searchTerm"  name="searchTerm" class="form-control" >  
+        </div> 
+        </form> 
+<!--     <form class="form-inline">      
+        <div class="form-group mx-sm-3 mb-2 mt-2 "> 
+            <label>Nom Montre en tapant</label> 
+  <input class="form-control"  #searchTerm (keyup)="onKeyUp(searchTerm.value)"> 
+        </div> 
+    </form>  -->
+<!--     <form class="form-inline">      
+        <div class="form-group mx-sm-3 mb-2 mt-2 "> 
+        <label>Nom Montre</label> 
+        <input type="text" class="form-control" [(ngModel)]="nomMontre" name="nomMontre" class="form-control"> 
+        <button type="submit" (click)="rechercherMons()" class="btn btn-primary mb-2 ml-2">Rechercher</button> 
+        </div> 
+        </form> -->
+
+    <div class="card shadow mb-4">
+    <div class="card-body">
+    <table class="table table-striped" >
+    <thead>
+        <tr> <th>Id</th><th>Nom</th> <th>Prix</th> <th>Date Création</th><th>Genre</th>  </tr>
+
+    <tr>
+    <th>Liste de Montres</th>
+    </tr>
+    </thead>
+    <tbody *ngFor="let montre of montres |searchFilter: searchTerm ">
+    <tr >
+        <td>{{montre.idMontre}}</td>
+        <td>{{montre.nomMontre}}</td>
+        <td>{{montre.prixMontre}}</td>
+        <td>{{montre.dateCreation | date:'dd/MM/yyyy'}}</td>
+        <!-- <td>{{montre.genre?.nomGen}}</td> -->
+   
+    <!--     <td><a class="btn btn-danger" (click)="supprimerMontre(montre)">Supprimer</a></td>
+        <td><a class="btn btn-success" [routerLink]="['/updateMontre',montre.idMontre]">Modifier</a></td> 
+ -->
+
+
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
