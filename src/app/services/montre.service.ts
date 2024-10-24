@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 import { Montre } from '../model/montre.model';
 import { Genre } from '../model/genre.model';
@@ -18,7 +19,7 @@ export class MontreService {
   montres! : Montre [];
 /*   genres : Genre[]; */
 
-  constructor(private http : HttpClient) {
+  constructor(private http : HttpClient,private authService:AuthService ){
   
 /* 
     this.genres=[{idGen : 1,nomGen : "Homme"},
@@ -40,9 +41,7 @@ export class MontreService {
 
    listeMontre(): Observable<Montre[]>{
     
-    console.log('=>')
-     return    this.http.get<Montre[]>(this.apiURL);
-
+    return this.http.get<Montre[]>(this.apiURL+"/all"); 
   }
 
 
@@ -53,14 +52,20 @@ export class MontreService {
 
 
    ajouterMontre(mon: Montre):Observable<Montre>{ 
-    return this.http.post<Montre>(this.apiURL, mon, httpOptions); 
+    let jwt = this.authService.getToken(); 
+      jwt = "Bearer "+jwt; 
+      let httpHeaders = new HttpHeaders({"Authorization":jwt})  
+   return this.http.post<Montre>(this.apiURL+"/addmon", mon, {headers:httpHeaders});
   } 
 
 
 
   supprimerMontre(id : number) { 
-    const url = `${this.apiURL}/${id}`; 
-     return this.http.delete(url, httpOptions); 
+    const url = `${this.apiURL}/delmon/${id}`; 
+    let jwt = this.authService.getToken(); 
+    jwt = "Bearer "+jwt; 
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})  
+      return this.http.delete(url,  {headers:httpHeaders}); 
          }
          
          /* 
@@ -90,8 +95,11 @@ export class MontreService {
 
 
       consulterMontre(id: number): Observable<Montre> { 
-        const url = `${this.apiURL}/${id}`; 
-        return this.http.get<Montre>(url); 
+        const url = `${this.apiURL}/getbyid/${id}`; 
+        let jwt = this.authService.getToken(); 
+        jwt = "Bearer "+jwt; 
+        let httpHeaders = new HttpHeaders({"Authorization":jwt})  
+          return this.http.get<Montre>(url,{headers:httpHeaders});
         } 
 
  /*      updateMontre(m:Montre){
@@ -103,7 +111,10 @@ export class MontreService {
 
   updateMontre(mon :Montre) : Observable<Montre> 
 {   
-return this.http.put<Montre>(this.apiURL, mon, httpOptions); 
+  let jwt = this.authService.getToken(); 
+          jwt = "Bearer "+jwt; 
+          let httpHeaders = new HttpHeaders({"Authorization":jwt})  
+   return this.http.put<Montre>(this.apiURL+"/updatemon", mon, {headers:httpHeaders}); 
 } 
 
       trierMontres(){ 
@@ -133,8 +144,11 @@ return this.http.put<Montre>(this.apiURL, mon, httpOptions);
 
 
           listeGenres():Observable<GenreWrapper>{ 
-            return this.http.get<GenreWrapper>(this.apiURLGen); 
-         } 
+            let jwt = this.authService.getToken(); 
+            jwt = "Bearer "+jwt; 
+            let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
+            return  this.http.get<GenreWrapper>(this.apiURLGen,{headers:httpHeaders}
+             );           } 
         /*   listeGenres():Observable<Genre[]>{ 
             return this.http.get<Genre[]>(this.apiURL+"/gen"); 
           }  */

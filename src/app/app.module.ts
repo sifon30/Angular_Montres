@@ -7,7 +7,7 @@ import { MontresComponent } from './montres/montres.component';
 import { AddMontreComponent } from './add-montre/add-montre.component';
 import { FormsModule } from '@angular/forms';
 import { UpdateMontreComponent } from './update-montre/update-montre.component';
-import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withFetch ,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RechercheParGenreComponent } from './recherche-par-genre/recherche-par-genre.component';
 import { RechercheParNomComponent } from './recherche-par-nom/recherche-par-nom.component';
 import { SearchFilterPipe } from './search-filter.pipe';
@@ -15,6 +15,7 @@ import { ListeGenresComponent } from './liste-genres/liste-genres.component';
 import { UpdateGenreComponent } from './update-genre/update-genre.component';
 import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { TokenInterceptor } from './services/token.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +37,11 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
     HttpClientModule
   ],
   providers: [
+
+    { provide : HTTP_INTERCEPTORS, 
+      useClass : TokenInterceptor, 
+      multi : true},
+
     provideClientHydration(),
     provideHttpClient(withFetch()) // Enable fetch API for HttpClient
 

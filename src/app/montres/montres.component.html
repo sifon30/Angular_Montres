@@ -15,8 +15,8 @@
         <td>{{montre.nomMontre}}</td>
         <td>{{montre.prixMontre}}</td>
         <td>{{montre.dateCreation | date:'dd/MM/yyyy'}}</td>
-<!--         <td>{{montre.genre?.nomGen}}</td> 
- -->   
+       <td>{{montre.genre.nomGen}}</td> 
+  
         <td><a   *ngIf="authService.isAdmin()" class="btn btn-danger" (click)="supprimerMontre(montre)">Supprimer</a></td>
         <td><a *ngIf="authService.isAdmin()"  class="btn btn-success" [routerLink]="['/updateMontre',montre.idMontre]">Modifier</a></td> 
 
