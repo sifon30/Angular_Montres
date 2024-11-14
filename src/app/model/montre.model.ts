@@ -1,4 +1,6 @@
 import { Genre } from "./genre.model";
+import { Image } from "./image.model";
+
 
 export class Montre{
     idMontre!: number;
@@ -6,4 +8,7 @@ export class Montre{
     prixMontre! : number;
     dateCreation! : Date ;
     genre! : Genre;
+    image! : Image;
+    imageStr!:string;
+    images!: Image[];
 }

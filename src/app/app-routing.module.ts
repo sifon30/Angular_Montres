@@ -9,6 +9,8 @@ import { ListeGenresComponent } from './liste-genres/liste-genres.component';
 import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { MontreGuard } from './montre.guard';
+import { RegisterComponent } from './register/register.component';
+import { VerifEmailComponent } from './verif-email/verif-email.component';
 
 const routes: Routes = [
   {path: "montres", component : MontresComponent},
@@ -19,14 +21,10 @@ const routes: Routes = [
   {path: "listeGenres", component : ListeGenresComponent}, 
   {path:  'login', component: LoginComponent} ,
   {path:  'app-forbidden', component: ForbiddenComponent}, 
-
-
-
-
-
-
-
-  { path: "", redirectTo: "montres", pathMatch: "full" }
+  {path:'register',component:RegisterComponent}, 
+  { path: 'verifEmail', component: VerifEmailComponent }, 
+  
+  { path: "", redirectTo: "montres", pathMatch: "full" },
 
 
 ];

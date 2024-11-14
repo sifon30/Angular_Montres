@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
   styleUrl: './add-montre.component.css'
 })
 export class AddMontreComponent implements OnInit {
+  uploadedImage!: File;
+  imagePath: any;
   newMontre = new Montre();
   genres! : Genre[];
 newIdGen! : number;
@@ -50,4 +52,12 @@ ngOnInit(): void {
 this.router.navigate(['montres']); 
       });  
    }
+
+
+   onImageUpload(event: any) {
+    this.uploadedImage = event.target.files[0];
+    var reader = new FileReader();
+    reader.readAsDataURL(this.uploadedImage);
+    reader.onload = (_event) => { this.imagePath = reader.result; }
+    }
 }

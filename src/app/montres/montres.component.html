@@ -16,6 +16,11 @@
         <td>{{montre.prixMontre}}</td>
         <td>{{montre.dateCreation | date:'dd/MM/yyyy'}}</td>
        <td>{{montre.genre.nomGen}}</td> 
+
+       <td><img class="card-img-top img-responsive"
+        src = "{{montre.imageStr}}"
+        style = "height :50px;width:100px">
+        </td>
   
         <td><a   *ngIf="authService.isAdmin()" class="btn btn-danger" (click)="supprimerMontre(montre)">Supprimer</a></td>
         <td><a *ngIf="authService.isAdmin()"  class="btn btn-success" [routerLink]="['/updateMontre',montre.idMontre]">Modifier</a></td> 

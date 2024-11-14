@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './services/auth.service';
+import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,10 +14,15 @@ export class AppComponent  implements OnInit{
 
 
     ngOnInit() {
+      this.authService.loadToken();
+      if (this.authService.getToken()==null ||
+       this.authService.isTokenExpired())
+      this.router.navigate(['/login']);
       this.authService.loadToken(); 
       if (this.authService.getToken()==null ||  
       this.authService.isTokenExpired()) 
       this.router.navigate(['/login']); 
+      
     }
 
     

@@ -1,7 +1,10 @@
+import { Image } from './../model/image.model';
+import { Genre } from './../model/genre.model';
 import { Component, OnInit } from '@angular/core';
 import { Montre } from '../model/montre.model';
 import { MontreService } from '../services/montre.service';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../auth.service';
+
 
 @Component({
   selector: 'app-montres',
@@ -11,6 +14,7 @@ export class MontresComponent  implements OnInit{
 
 
   montres !  : Montre[];
+  genre? :Genre[];
 
 
 
@@ -43,7 +47,9 @@ chargerMontres(){
   this.montreService.listeMontre().subscribe(mons => { 
     console.log(mons); 
     this.montres = mons; 
-  });  
+    this.montres.forEach((mons) => {
+      mons.imageStr='data: '+mons.images[0].type+' ; base64, '+mons.images[0].image;});
+    });
 } 
 
 
